@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { 
@@ -51,11 +51,11 @@ export default function App() {
   }, [messages, isLoading]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/')
+    fetch('https://hiremeai-backend-vl3u.onrender.com/')
       .then(res => res.json())
       .then(() => {
         setIsBackendReady(true);
-        return fetch('http://127.0.0.1:8000/resume');
+        return fetch('https://hiremeai-backend-vl3u.onrender.com/resume');
       })
       .then(res => res.json())
       .then(data => setCandidate(data))
@@ -78,7 +78,7 @@ export default function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/chat', {
+      const response = await fetch('https://hiremeai-backend-vl3u.onrender.com/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: textToSend })
@@ -138,7 +138,7 @@ export default function App() {
 
   const candidateName = candidate?.name || "Parsing Resume...";
   const candidateRole = candidate?.experiences?.[0]?.role || "Candidate Profile";
-  const candidateEducation = candidate?.education?.[0]?.split('–')?.[0]?.trim() || "Verified";
+  const candidateEducation = candidate?.education?.[0]?.split('â€“')?.[0]?.trim() || "Verified";
   const candidateSkills = candidate?.skills?.slice(0, 12) || [];
   const firstName = candidate?.name ? candidate.name.split(' ')[0] : "Candidate";
 
@@ -459,7 +459,7 @@ export default function App() {
             </form>
             <div className="flex items-center justify-between px-2 mt-2.5 text-[11px] text-zinc-500">
               <span>Strict adherence to verified resume data. Zero hallucination mode active.</span>
-              <span className="hidden sm:inline font-mono">Press Enter ↵ to send</span>
+              <span className="hidden sm:inline font-mono">Press Enter â†µ to send</span>
             </div>
           </div>
         </footer>
